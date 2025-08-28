@@ -29,8 +29,25 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API Routes
-app.use('/api/customer', new CustomerRoutes().getRouter());
+// Initialize routes asynchronously
+let customerRoutes = null;
+
+// Initialize routes
+const initializeRoutes = async () => {
+  try {
+    customerRoutes = new CustomerRoutes();
+    app.use('/api/customer', customerRoutes.getRouter());
+    logger.info('Routes initialized successfully');
+  } catch (error) {
+    logger.error(`Failed to initialize routes: ${error.message}`);
+    throw error;
+  }
+};
+
+// Initialize the application
+app.initialize = async () => {
+  await initializeRoutes();
+};
 
 // 404 handler
 app.use((req, res) => {

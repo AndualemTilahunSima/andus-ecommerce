@@ -1,6 +1,7 @@
 import CustomerService from '../customer/service/CustomerService.js';
 import CustomerController from '../customer/controller/CustomerController.js';
-import { InMemoryCustomerRepository } from '../customer/repository/CustomerRepository.js';
+import { SequelizeCustomerRepository } from '../customer/repository/SequelizeCustomerRepository.js';
+import { testConnection } from './database.js';
 
 /**
  * Simple Dependency Injection Container
@@ -13,9 +14,15 @@ export default class Container {
     this.#registerServices();
   }
 
-  #registerServices() {
+  async #registerServices() {
+    // Test database connection first
+    const isConnected = await testConnection();
+    if (!isConnected) {
+      throw new Error('Database connection failed. Please check your configuration.');
+    }
+
     // Register repositories
-    this.#services.set('customerRepository', new InMemoryCustomerRepository());
+    this.#services.set('customerRepository', new SequelizeCustomerRepository());
 
     // Register services
     this.#services.set('customerService', new CustomerService(

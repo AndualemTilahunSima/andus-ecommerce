@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import CustomerController from '../controller/CustomerController.js';
 import CustomerService from '../service/CustomerService.js';
-import { InMemoryCustomerRepository } from '../repository/CustomerRepository.js';
+import { SequelizeCustomerRepository } from '../repository/SequelizeCustomerRepository.js';
 
 /**
  * Customer Routes - RESTful API endpoints
@@ -17,9 +17,9 @@ export default class CustomerRoutes {
     this.#setupRoutes();
   }
 
-  #initializeDependencies() {
-    // Dependency injection setup
-    const customerRepository = new InMemoryCustomerRepository();
+  async #initializeDependencies() {
+    // Dependency injection setup with Sequelize repository
+    const customerRepository = new SequelizeCustomerRepository();
     const customerService = new CustomerService(customerRepository);
     this.#customerController = new CustomerController(customerService);
   }
