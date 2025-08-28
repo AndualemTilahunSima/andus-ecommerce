@@ -1,7 +1,9 @@
 // Specific custom error classes 
-class CustomerNotFoundError extends Error {
-    constructor(message) {
-        super(message, 'CUSTOMER_NOT_FOUND_ERROR');
+export default class CustomerNotFoundError extends Error {
+    constructor(message = 'Customer not found') {
+        super(message);
+        this.name = 'CustomerNotFoundError';
+        this.code = 'CUSTOMER_NOT_FOUND_ERROR';
+        this.status = 404;
     }
-} 
-export default CustomerNotFoundError;
+}

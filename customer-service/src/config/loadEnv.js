@@ -1,9 +1,20 @@
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const envFile =
-  process.env.NODE_ENV === 'production' ? '../env/.env.prod' :
-    process.env.NODE_ENV === 'staging' ? '../env/.env.staging' :
-      '../env/.env'; // default: dev
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-console.log(envFile)
-dotenv.config({ path: "../env/.env" });
+const nodeEnv = process.env.NODE_ENV || 'development';
+
+const envFilename = nodeEnv === 'production'
+  ? '.env.prod'
+  : nodeEnv === 'staging'
+    ? '.env.staging'
+    : '.env';
+
+const envPath = path.resolve(__dirname, `../../env/${envFilename}`);
+
+dotenv.config({ path: envPath });
+
+export const CURRENT_ENV = nodeEnv;

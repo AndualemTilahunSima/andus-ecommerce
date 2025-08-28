@@ -3,6 +3,6 @@ version: '3.8'
 services:
   flyway:
     image: flyway/flyway:latest
-    command: -url=jdbc:postgresql://postgres:5432/ecommerce_db -user=postgres -password=postgres -schemas=customer_local
+    command: -url=jdbc:postgresql://postgres:5432/ecommerce_db -user=postgres -password=postgres -schemas=customer_local migrate
     volumes:
       - ./db/migrations:/flyway/sql

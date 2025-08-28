@@ -1,15 +1,20 @@
 {
   "name": "customer-service",
   "version": "1.0.0",
-  "description": "",
+  "description": "Customer microservice with clean architecture",
   "main": "src/server.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon src/server.js",
-    "staging": "NODE_ENV=staging node src/server.js",
-    "prod": "NODE_ENV=production node src/server.js",
-    "migrate": "docker compose run --rm flyway"
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "staging": "cross-env NODE_ENV=staging node src/server.js",
+    "prod": "cross-env NODE_ENV=production node src/server.js",
+    "migrate": "docker compose run --rm flyway",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
-  "keywords": [],
+  "keywords": ["microservice", "clean-architecture", "nodejs", "express"],
   "author": "",
   "license": "ISC",
   "type": "module",
@@ -17,10 +22,19 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "path": "^0.12.7",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "zod": "^3.23.8",
+    "helmet": "^8.0.0",
+    "cors": "^2.8.5",
+    "compression": "^1.7.4",
+    "express-rate-limit": "^7.4.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^9.34.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "supertest": "^7.0.0"
   }
 }

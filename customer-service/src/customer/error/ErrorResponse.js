@@ -1,7 +1,7 @@
-export const errorResponse = (res, statusCode, message) => {
+export const errorResponse = (res, statusCode, message, code) => {
     return res.status(statusCode).json({
-        status: 'error',
-        statusCode,
+        success: false,
+        code,
         message,
         timestamp: new Date().toISOString(),
     });
