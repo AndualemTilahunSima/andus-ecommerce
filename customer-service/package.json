@@ -2,11 +2,12 @@
   "name": "customer-service",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/server.js",
+  "main": "src/server.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon src/server.js",
     "staging": "NODE_ENV=staging node src/server.js",
-    "prod": "NODE_ENV=production node src/server.js"
+    "prod": "NODE_ENV=production node src/server.js",
+    "migrate": "docker compose run --rm flyway"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,9 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^17.2.1",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "path": "^0.12.7",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "eslint": "^9.34.0",

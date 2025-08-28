@@ -1,5 +1,5 @@
 import express from 'express';
-import todosRouter from './customer/customer-route.js';
+import router from './customer/customer-route.js';
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.get('/health', (req, res) => {
 });
 
 // Routes
-app.use('/api/todos', todosRouter);
+app.use('/api/customer', router);
 
 // 404 handler
 app.use((req, res) => {
